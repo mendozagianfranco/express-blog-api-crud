@@ -19,6 +19,14 @@ function show(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.find(post => post.id === id);
 
+    if (!post) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    }
+
     res.json(post);
 }
 
@@ -39,6 +47,14 @@ function modify(req, res) {
 function destroy(req, res) {
     const id = parseInt(req.params.id);
     const post = posts.findIndex(post => post.id === id);
+
+    if (post < 0) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    }
 
     posts.splice(post, 1);
     console.log(posts);
