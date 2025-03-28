@@ -1,12 +1,14 @@
 const posts = require('../data/posts');
 
 function index(req, res) {
-    res.send('lista post');
+    res.json(posts);
 }
 
 function show(req, res) {
     const id = parseInt(req.params.id);
-    res.send('Visualliazione del post ' + id);
+    const post = posts.find(post => post.id === id);
+
+    res.json(post);
 }
 
 function store(req, res) {
@@ -25,7 +27,11 @@ function modify(req, res) {
 
 function destroy(req, res) {
     const id = parseInt(req.params.id);
-    res.send('Eliminazione del post ' + id);
+    const post = posts.findIndex(post => post.id === id);
+
+    posts.splice(post, 1);
+    console.log(posts);
+    res.sendStatus(204);
 }
 
 module.exports = { index, show, store, update, modify, destroy };
