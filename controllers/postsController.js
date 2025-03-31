@@ -4,11 +4,9 @@ function index(req, res) {
 
     let filteredPosts = posts;
     let tag = req.query.tag;
-    let capitalizeTag = tag[0].toUpperCase() + tag.slice(1);
-
-    console.log(capitalizeTag);
 
     if (tag) {
+        let capitalizeTag = tag[0].toUpperCase() + tag.slice(1);
         filteredPosts = posts.filter(post => post.tags.includes(capitalizeTag));
     }
 
