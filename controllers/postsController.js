@@ -31,7 +31,18 @@ function show(req, res) {
 }
 
 function store(req, res) {
-    res.send('Creazione post');
+    const newId = posts.at(-1).id + 1;
+    const newPost = {
+        id: newId,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+
+    posts.push(newPost);
+    console.log(posts);
+    res.status(201).json(newPost);
 }
 
 function update(req, res) {
