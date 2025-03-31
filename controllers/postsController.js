@@ -66,7 +66,35 @@ function update(req, res) {
 
 function modify(req, res) {
     const id = parseInt(req.params.id);
-    res.send('Modifica parziale del post ' + id);
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    }
+
+    if (req.body.title) {
+        post.title = req.body.title;
+    }
+
+    if (req.body.content) {
+        post.content = req.body.content;
+    }
+
+    if (req.body.image) {
+        post.image = req.body.imgae;
+    }
+
+    if (req.body.tags) {
+        post.tags = req.body.tags;
+    }
+
+    console.log(posts);
+
+    res.json(post);
 }
 
 function destroy(req, res) {
