@@ -47,7 +47,23 @@ function store(req, res) {
 
 function update(req, res) {
     const id = parseInt(req.params.id);
-    res.send('Modifica integrale del post ' + id);
+    const post = posts.find(post => post.id === id);
+
+    if (!post) {
+        return res.status(404).json({
+            status: 404,
+            error: "Not Found",
+            message: "Post non trovato"
+        });
+    }
+
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    res.json(post);
+
 }
 
 function modify(req, res) {
