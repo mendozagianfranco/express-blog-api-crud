@@ -85,7 +85,7 @@ function modify(req, res) {
     }
 
     if (req.body.image) {
-        post.image = req.body.imgae;
+        post.image = req.body.image;
     }
 
     if (req.body.tags) {
